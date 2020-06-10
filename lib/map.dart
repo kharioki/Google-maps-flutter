@@ -12,6 +12,7 @@ class _MapPageState extends State<MapPage> {
   Set<Marker> _markers = HashSet<Marker>();
   Set<Polygon> _polygons = HashSet<Polygon>();
   Set<Polyline> _polylines = HashSet<Polyline>();
+  Set<Circle> _circles = HashSet<Circle>();
 
   GoogleMapController _mapController;
   BitmapDescriptor _markerIcon;
@@ -22,6 +23,7 @@ class _MapPageState extends State<MapPage> {
     _setMarkerIcon();
     _setPolygons();
     _setPolylines();
+    _setCircles();
   }
 
   void _setMarkerIcon() async {
@@ -54,6 +56,7 @@ class _MapPageState extends State<MapPage> {
     polylineLatLngs.add(LatLng(-1.256389, 36.807223));
     polylineLatLngs.add(LatLng(-1.259389, 36.803223));
     polylineLatLngs.add(LatLng(-1.259389, 36.813223));
+    polylineLatLngs.add(LatLng(-1.253389, 36.817223));
 
     _polylines.add(
       Polyline(
@@ -61,6 +64,19 @@ class _MapPageState extends State<MapPage> {
         points: polylineLatLngs,
         color: Colors.teal,
         width: 1,
+      ),
+    );
+  }
+
+  void _setCircles() {
+    _circles.add(
+      Circle(
+        circleId: CircleId('0'),
+        center: LatLng(-1.213389, 36.815223),
+        radius: 1000,
+        fillColor: Color.fromRGBO(102, 51, 153, .5),
+        strokeWidth: 1,
+        strokeColor: Colors.purpleAccent,
       ),
     );
   }
@@ -101,6 +117,7 @@ class _MapPageState extends State<MapPage> {
             markers: _markers,
             polygons: _polygons,
             polylines: _polylines,
+            circles: _circles,
           ),
           Container(
             alignment: Alignment.bottomCenter,
