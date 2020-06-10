@@ -12,6 +12,19 @@ class _MapPageState extends State<MapPage> {
   Set<Marker> _markers = HashSet<Marker>();
 
   GoogleMapController _mapController;
+  BitmapDescriptor _markerIcon;
+
+  @override
+  void initState() {
+    super.initState();
+    _setMarkerIcon();
+  }
+
+  void _setMarkerIcon() async {
+    _markerIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), 'assets/icons/noodle_icon.png');
+  }
+
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
 
@@ -24,6 +37,7 @@ class _MapPageState extends State<MapPage> {
             title: 'Nairobi',
             snippet: 'City under the Sun',
           ),
+          icon: _markerIcon,
         ),
       );
     });
