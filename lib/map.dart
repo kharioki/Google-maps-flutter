@@ -10,6 +10,8 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   Set<Marker> _markers = HashSet<Marker>();
+  Set<Polygon> _polygons = HashSet<Polygon>();
+  Set<Polyline> _polylines = HashSet<Polyline>();
 
   GoogleMapController _mapController;
   BitmapDescriptor _markerIcon;
@@ -18,11 +20,49 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
     _setMarkerIcon();
+    _setPolygons();
+    _setPolylines();
   }
 
   void _setMarkerIcon() async {
     _markerIcon = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), 'assets/icons/noodle_icon.png');
+  }
+
+  void _setPolygons() {
+    List<LatLng> polygonLatLngs = List<LatLng>();
+
+    polygonLatLngs.add(LatLng(-1.283389, 36.817223));
+    polygonLatLngs.add(LatLng(-1.286389, 36.807223));
+    polygonLatLngs.add(LatLng(-1.289389, 36.803223));
+    polygonLatLngs.add(LatLng(-1.289389, 36.813223));
+
+    _polygons.add(
+      Polygon(
+        polygonId: PolygonId('0'),
+        points: polygonLatLngs,
+        fillColor: Colors.transparent,
+        strokeWidth: 1,
+      ),
+    );
+  }
+
+  void _setPolylines() {
+    List<LatLng> polylineLatLngs = List<LatLng>();
+
+    polylineLatLngs.add(LatLng(-1.253389, 36.817223));
+    polylineLatLngs.add(LatLng(-1.256389, 36.807223));
+    polylineLatLngs.add(LatLng(-1.259389, 36.803223));
+    polylineLatLngs.add(LatLng(-1.259389, 36.813223));
+
+    _polylines.add(
+      Polyline(
+        polylineId: PolylineId('0'),
+        points: polylineLatLngs,
+        color: Colors.teal,
+        width: 1,
+      ),
+    );
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -59,6 +99,8 @@ class _MapPageState extends State<MapPage> {
               zoom: 12,
             ),
             markers: _markers,
+            polygons: _polygons,
+            polylines: _polylines,
           ),
           Container(
             alignment: Alignment.bottomCenter,
