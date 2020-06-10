@@ -26,6 +26,14 @@ class _MapPageState extends State<MapPage> {
     _setCircles();
   }
 
+  void _setMapStyle() async {
+    String style = await DefaultAssetBundle.of(context)
+        .loadString('assets/map/map_style.json');
+
+    // set style to controller
+    _mapController.setMapStyle(style);
+  }
+
   void _setMarkerIcon() async {
     _markerIcon = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), 'assets/icons/noodle_icon.png');
@@ -45,6 +53,7 @@ class _MapPageState extends State<MapPage> {
         points: polygonLatLngs,
         fillColor: Colors.transparent,
         strokeWidth: 1,
+        strokeColor: Colors.purpleAccent,
       ),
     );
   }
@@ -62,7 +71,7 @@ class _MapPageState extends State<MapPage> {
       Polyline(
         polylineId: PolylineId('0'),
         points: polylineLatLngs,
-        color: Colors.teal,
+        color: Colors.purpleAccent,
         width: 1,
       ),
     );
@@ -97,6 +106,8 @@ class _MapPageState extends State<MapPage> {
         ),
       );
     });
+
+    _setMapStyle();
   }
 
   @override
@@ -118,6 +129,7 @@ class _MapPageState extends State<MapPage> {
             polygons: _polygons,
             polylines: _polylines,
             circles: _circles,
+            myLocationEnabled: true,
           ),
           Container(
             alignment: Alignment.bottomCenter,
