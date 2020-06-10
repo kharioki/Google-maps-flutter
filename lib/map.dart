@@ -123,7 +123,7 @@ class _MapPageState extends State<MapPage> {
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: LatLng(-1.286389, 36.817223),
-              zoom: 12,
+              zoom: 12.5,
             ),
             markers: _markers,
             polygons: _polygons,
