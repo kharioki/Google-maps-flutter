@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_app/map.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.teal,
@@ -48,24 +50,30 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        elevation: 0.0,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Using Google Maps in Flutter',
+              'Using Google Maps in Flutter:',
               style: TextStyle(
                 color: Colors.teal,
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
+                fontWeight: FontWeight.w300,
+                fontSize: 24,
               ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MapPage()),
+          );
+        },
         tooltip: 'Show Map',
         child: Icon(Icons.map),
       ), // This trailing comma makes auto-formatting nicer for build methods.
